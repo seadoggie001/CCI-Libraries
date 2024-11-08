@@ -4,7 +4,7 @@
       "types": {
         "message": [
           {
-            "name": "Repeated Delayed TNT",
+            "name": "!tnt",
             "conditions": [
               {
                 "phrase": "!tnt",
@@ -15,7 +15,7 @@
                 "conditions": [
                   {
                     "variableName": "dcommand_init",
-                    "variableInput": "10",
+                    "variableInput": "200",
                     "type": "variableInsert",
                     "displayName": "dcommand_init=initial delay before executing the first command"
                   },
@@ -88,7 +88,7 @@
             "allowsOtherEventsToTrigger": true
           },
           {
-            "name": "Many Fireworks",
+            "name": "!fireworks",
             "conditions": [
               {
                 "phrase": "!fireworks",
@@ -172,7 +172,7 @@
             "allowsOtherEventsToTrigger": true
           },
           {
-            "name": "All the chickens",
+            "name": "!chickens",
             "conditions": [
               {
                 "phrase": "!chickens",
@@ -239,6 +239,34 @@
                 "name": "Delayed Repeated Command",
                 "type": "constant",
                 "displayName": "Delayed Repeated Command"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "!random",
+            "conditions": [
+              {
+                "phrase": "!random",
+                "type": "message"
+              },
+              {
+                "source": "1|2|3|4|5|6|7|8|9|0|11|12|13|14|15|16|17|18|19|20",
+                "separator": "|",
+                "result": "array",
+                "type": "stringSplit",
+                "displayName": "Split a string into an array"
+              },
+              {
+                "name": "GetRandomElementOfArray",
+                "type": "constant"
+              }
+            ],
+            "outcomes": [
+              {
+                "message": "$randomElement",
+                "type": "chat",
+                "displayName": "Output the random element"
               }
             ],
             "allowsOtherEventsToTrigger": true

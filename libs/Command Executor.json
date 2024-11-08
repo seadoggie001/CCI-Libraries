@@ -34,6 +34,16 @@
         }
       ],
       "type": "multiple"
+    },
+    "{loc} processing": {
+      "target": "$playerName",
+      "horiRadius": "10",
+      "vertRadius": "10",
+      "tries": "20",
+      "variableName": "loc",
+      "customHeight": "3",
+      "requireSolidBlock": true,
+      "type": "freeSpace"
     }
   },
   "outcomes": {
@@ -42,129 +52,16 @@
       "type": "chat"
     },
     "Delayed Repeated Command": {
-      "outcomes": [
+      "events": [
         {
-          "condition": {
-            "condition": {
-              "variableName": "dcommand_init",
-              "type": "variableExists",
-              "displayName": "Exists?"
-            },
-            "passCondition": {
-              "type": "null",
-              "displayName": "Pass: Leave as init delay"
-            },
-            "failCondition": {
-              "variableName": "dcommand_init",
-              "variableInput": "0",
-              "type": "variableInsert",
-              "displayName": "else 0 delay"
-            },
-            "type": "conditional",
-            "displayName": "if dcommand_init exists"
-          },
-          "outcome": {
-            "type": "null"
-          },
-          "type": "conditional",
-          "displayName": "Set init delay"
-        },
-        {
-          "times": "$dcommand_count",
-          "outcome": {
-            "events": [
-              {
-                "name": "Not here because nesting is awful",
-                "constantName": "Delayed Event",
-                "conditions": [],
-                "outcomes": [],
-                "allowsOtherEventsToTrigger": true,
-                "playTime": "$dcommand_delay"
-              }
-            ],
-            "type": "event"
-          },
-          "type": "repeat"
-        },
-        {
-          "condition": {
-            "variableName": "dcommand_bossbar",
-            "variableResult": "true",
-            "type": "variableCheck",
-            "displayName": "if dcommand_bossbar"
-          },
-          "outcome": {
-            "outcomes": [
-              {
-                "condition": {
-                  "variableName": "bossbar_total",
-                  "variableInput": "$dcommand_count",
-                  "type": "variableInsert"
-                },
-                "outcome": {
-                  "name": "Bossbar Create",
-                  "type": "constant",
-                  "displayName": "Bossbar Create"
-                },
-                "type": "conditional",
-                "displayName": "Create bossbar"
-              },
-              {
-                "condition": {
-                  "conditions": [
-                    {
-                      "calc": "*",
-                      "value1": "dcommand_count",
-                      "value2": "dcommand_delay",
-                      "variableName": "dcommand_bossbar_delay",
-                      "type": "math"
-                    },
-                    {
-                      "calc": "+",
-                      "value1": "dcommand_delay",
-                      "value2": "dcommand_bossbar_delay",
-                      "variableName": "dcommand_bossbar_delay",
-                      "type": "math"
-                    },
-                    {
-                      "calc": "+",
-                      "value1": "dcommand_init",
-                      "value2": "dcommand_bossbar_delay",
-                      "variableName": "dcommand_bossbar_delay",
-                      "type": "math"
-                    }
-                  ],
-                  "type": "multiple"
-                },
-                "outcome": {
-                  "events": [
-                    {
-                      "conditions": [],
-                      "outcomes": [
-                        {
-                          "name": "Bossbar Destroy",
-                          "type": "constant",
-                          "displayName": ""
-                        }
-                      ],
-                      "allowsOtherEventsToTrigger": true,
-                      "playTime": "1"
-                    }
-                  ],
-                  "type": "event"
-                },
-                "type": "conditional",
-                "displayName": "Destroy Bossbar (delayed)"
-              }
-            ],
-            "type": "multiple",
-            "displayName": "Create & Destroy Bossbar"
-          },
-          "type": "conditional",
-          "displayName": "Setup bossbar if needed"
+          "constantName": "Delayed Event",
+          "conditions": [],
+          "outcomes": [],
+          "allowsOtherEventsToTrigger": true,
+          "playTime": "$dcommand_init"
         }
       ],
-      "type": "multiple"
+      "type": "event"
     },
     "Execute Command": {
       "outcomes": [
@@ -233,146 +130,245 @@
   },
   "events": {
     "Delayed Event": {
-      "conditions": [
-        {
-          "condition": {
-            "variableName": "dcommand_random",
-            "type": "variableExists"
-          },
-          "passCondition": {
-            "type": "null"
-          },
-          "failCondition": {
-            "variableName": "dcommand_random",
-            "variableInput": "100",
-            "type": "variableInsert"
-          },
-          "type": "conditional",
-          "displayName": "dcommand_random: Default"
-        }
-      ],
+      "name": "Use Outcome instead",
+      "conditions": [],
       "outcomes": [
         {
-          "condition": {
-            "conditions": [
-              {
-                "variableName": "bossbar_value",
-                "variableInput": "$iteCount",
-                "type": "variableInsert"
-              },
-              {
-                "calc": "+",
-                "value1": "1",
-                "value2": "bossbar_value",
-                "variableName": "bossbar_value",
-                "type": "math"
-              }
-            ],
-            "type": "multiple"
-          },
-          "outcome": {
-            "name": "Bossbar set Value",
-            "type": "constant",
-            "displayName": "Bossbar set Value"
-          },
-          "type": "conditional",
-          "displayName": "Bossbar set Value"
-        },
-        {
-          "condition": {
-            "conditions": [
-              {
-                "value1": "0",
-                "value2": "100",
-                "variableName": "dcommand_random_num",
-                "type": "randomNumber"
-              },
-              {
-                "optionalVariableName": "dcommand_random_num",
-                "min": 0.0,
-                "maxVar": "$dcommand_random",
-                "type": "range"
-              }
-            ],
-            "type": "multiple",
-            "displayName": "Check random"
-          },
-          "outcome": {
-            "condition": {
-              "conditions": [
-                {
-                  "condition": {
-                    "variableName": "dcommand_array",
-                    "type": "variableExists",
-                    "displayName": "dcommand_array Exists?"
-                  },
-                  "passCondition": {
+          "outcomes": [
+            {
+              "times": "$dcommand_count",
+              "outcome": {
+                "events": [
+                  {
                     "conditions": [
                       {
-                        "source": "$dcommand_array",
-                        "separator": "|",
-                        "result": "array",
-                        "omitEmptyStrings": true,
-                        "type": "stringSplit"
-                      },
-                      {
-                        "name": "GetRandomElementOfArray",
-                        "type": "constant"
-                      },
-                      {
-                        "variableName": "command",
-                        "variableInput": "$randomElement",
-                        "type": "variableInsert"
+                        "condition": {
+                          "variableName": "dcommand_random",
+                          "type": "variableExists"
+                        },
+                        "passCondition": {
+                          "type": "null"
+                        },
+                        "failCondition": {
+                          "variableName": "dcommand_random",
+                          "variableInput": "100",
+                          "type": "variableInsert"
+                        },
+                        "type": "conditional",
+                        "displayName": "dcommand_random: Default"
                       }
                     ],
-                    "type": "multiple",
-                    "displayName": "Get command from array"
-                  },
-                  "failCondition": {
-                    "variableName": "command",
-                    "variableInput": "$dcommand_command",
-                    "type": "variableInsert",
-                    "displayName": "Get command"
-                  },
-                  "type": "conditional",
-                  "displayName": "Get command..."
-                },
-                {
-                  "name": "Two High Spawning",
-                  "type": "constant",
-                  "displayName": "Update loc"
-                },
-                {
-                  "source": "$command",
-                  "target": "{loc}",
-                  "replacement": "$loc",
-                  "result": "command",
-                  "literal": true,
-                  "type": "stringReplace",
-                  "displayName": "Replace loc"
-                }
-              ],
-              "type": "multiple",
-              "displayName": "Build command"
+                    "outcomes": [
+                      {
+                        "condition": {
+                          "conditions": [
+                            {
+                              "variableName": "bossbar_value",
+                              "variableInput": "$iteCount",
+                              "type": "variableInsert"
+                            },
+                            {
+                              "calc": "+",
+                              "value1": "1",
+                              "value2": "bossbar_value",
+                              "variableName": "bossbar_value",
+                              "type": "math"
+                            }
+                          ],
+                          "type": "multiple"
+                        },
+                        "outcome": {
+                          "name": "Bossbar set Value",
+                          "type": "constant",
+                          "displayName": "Bossbar set Value"
+                        },
+                        "type": "conditional",
+                        "displayName": "Bossbar set Value"
+                      },
+                      {
+                        "condition": {
+                          "conditions": [
+                            {
+                              "value1": "0",
+                              "value2": "100",
+                              "variableName": "dcommand_random_num",
+                              "type": "randomNumber"
+                            },
+                            {
+                              "optionalVariableName": "dcommand_random_num",
+                              "min": 0.0,
+                              "maxVar": "$dcommand_random",
+                              "type": "range"
+                            }
+                          ],
+                          "type": "multiple",
+                          "displayName": "Check random"
+                        },
+                        "outcome": {
+                          "condition": {
+                            "conditions": [
+                              {
+                                "condition": {
+                                  "variableName": "dcommand_array",
+                                  "type": "variableExists",
+                                  "displayName": "dcommand_array Exists?"
+                                },
+                                "passCondition": {
+                                  "conditions": [
+                                    {
+                                      "source": "$dcommand_array",
+                                      "separator": "|",
+                                      "result": "array",
+                                      "omitEmptyStrings": true,
+                                      "type": "stringSplit"
+                                    },
+                                    {
+                                      "name": "GetRandomElementOfArray",
+                                      "type": "constant"
+                                    },
+                                    {
+                                      "variableName": "command",
+                                      "variableInput": "$randomElement",
+                                      "type": "variableInsert"
+                                    }
+                                  ],
+                                  "type": "multiple",
+                                  "displayName": "Get command from array"
+                                },
+                                "failCondition": {
+                                  "variableName": "command",
+                                  "variableInput": "$dcommand_command",
+                                  "type": "variableInsert",
+                                  "displayName": "Get command"
+                                },
+                                "type": "conditional",
+                                "displayName": "Get command..."
+                              },
+                              {
+                                "name": "{loc} processing",
+                                "type": "constant",
+                                "displayName": "Update loc"
+                              },
+                              {
+                                "source": "$command",
+                                "target": "{loc}",
+                                "replacement": "$loc",
+                                "result": "command",
+                                "literal": true,
+                                "type": "stringReplace",
+                                "displayName": "Replace loc"
+                              }
+                            ],
+                            "type": "multiple",
+                            "displayName": "Build command"
+                          },
+                          "outcome": {
+                            "name": "Execute Command",
+                            "type": "constant",
+                            "displayName": "Execute Command"
+                          },
+                          "type": "conditional"
+                        },
+                        "conditionNotMetOutcome": {
+                          "message": "random failed :(",
+                          "type": "chat",
+                          "displayName": "Message for testing random fails",
+                          "disabled": true
+                        },
+                        "type": "conditional"
+                      }
+                    ],
+                    "allowsOtherEventsToTrigger": true,
+                    "playTime": "$dcommand_delay"
+                  }
+                ],
+                "type": "event"
+              },
+              "type": "repeat"
             },
-            "outcome": {
-              "name": "Execute Command",
-              "type": "constant",
-              "displayName": "Execute Command"
-            },
-            "type": "conditional"
-          },
-          "conditionNotMetOutcome": {
-            "message": "random failed :(",
-            "type": "chat",
-            "displayName": "Message for testing random fails",
-            "disabled": true
-          },
-          "type": "conditional"
+            {
+              "condition": {
+                "variableName": "dcommand_bossbar",
+                "variableResult": "true",
+                "type": "variableCheck",
+                "displayName": "if dcommand_bossbar"
+              },
+              "outcome": {
+                "outcomes": [
+                  {
+                    "condition": {
+                      "variableName": "bossbar_total",
+                      "variableInput": "$dcommand_count",
+                      "type": "variableInsert"
+                    },
+                    "outcome": {
+                      "name": "Bossbar Create",
+                      "type": "constant",
+                      "displayName": "Bossbar Create"
+                    },
+                    "type": "conditional",
+                    "displayName": "Create bossbar"
+                  },
+                  {
+                    "condition": {
+                      "conditions": [
+                        {
+                          "calc": "*",
+                          "value1": "dcommand_count",
+                          "value2": "dcommand_delay",
+                          "variableName": "dcommand_bossbar_delay",
+                          "type": "math"
+                        },
+                        {
+                          "calc": "+",
+                          "value1": "dcommand_delay",
+                          "value2": "dcommand_bossbar_delay",
+                          "variableName": "dcommand_bossbar_delay",
+                          "type": "math"
+                        },
+                        {
+                          "calc": "+",
+                          "value1": "dcommand_init",
+                          "value2": "dcommand_bossbar_delay",
+                          "variableName": "dcommand_bossbar_delay",
+                          "type": "math"
+                        }
+                      ],
+                      "type": "multiple"
+                    },
+                    "outcome": {
+                      "events": [
+                        {
+                          "conditions": [],
+                          "outcomes": [
+                            {
+                              "name": "Bossbar Destroy",
+                              "type": "constant",
+                              "displayName": ""
+                            }
+                          ],
+                          "allowsOtherEventsToTrigger": true,
+                          "playTime": "1"
+                        }
+                      ],
+                      "type": "event"
+                    },
+                    "type": "conditional",
+                    "displayName": "Destroy Bossbar (delayed)"
+                  }
+                ],
+                "type": "multiple",
+                "displayName": "Create & Destroy Bossbar"
+              },
+              "type": "conditional",
+              "displayName": "Setup bossbar if needed"
+            }
+          ],
+          "type": "multiple"
         }
       ],
       "allowsOtherEventsToTrigger": true,
-      "playTime": "$dcommand_delay"
+      "playTime": "$dcommand_init"
     }
   }
 }
