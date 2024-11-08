@@ -1,0 +1,279 @@
+{
+  "configs": [
+    {
+      "types": {
+        "message": [
+          {
+            "name": "Repeated Delayed TNT",
+            "conditions": [
+              {
+                "phrase": "!tnt",
+                "type": "message",
+                "displayName": "!tnt"
+              },
+              {
+                "conditions": [
+                  {
+                    "variableName": "dcommand_init",
+                    "variableInput": "10",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_init=initial delay before executing the first command"
+                  },
+                  {
+                    "variableName": "dcommand_command",
+                    "variableInput": "summon tnt {loc} {fuse:3}",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_command=the command to execute"
+                  },
+                  {
+                    "variableName": "dcommand_delay",
+                    "variableInput": "15",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_delay=the delay between command executions"
+                  },
+                  {
+                    "variableName": "dcommand_count",
+                    "variableInput": "20",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_count=the number of times to execute the command"
+                  },
+                  {
+                    "variableName": "dcommand_bossbar",
+                    "variableInput": "true",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_bossbar=true/false to display a bossbar"
+                  },
+                  {
+                    "variableName": "dcommand_random",
+                    "variableInput": "100",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_random=percent chance (max 100) that command will be executed"
+                  },
+                  {
+                    "variableName": "bossbar_id",
+                    "variableInput": "10_delayed_repeat_tnt_bossbar",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_id=unique identifier for the bossbar"
+                  },
+                  {
+                    "variableName": "bossbar_title",
+                    "variableInput": "\"$dcommand_count Delayed TNT\"",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_title=text to display on bossbar"
+                  },
+                  {
+                    "variableName": "bossbar_targets",
+                    "variableInput": "@a",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_targets=selector for who to show the bossbar to"
+                  },
+                  {
+                    "variableName": "bossbar_color",
+                    "variableInput": "red",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_color=color of the bossbar"
+                  }
+                ],
+                "type": "multiple",
+                "displayName": "Delayed Repeat Command Setup"
+              }
+            ],
+            "outcomes": [
+              {
+                "name": "Delayed Repeated Command",
+                "type": "constant",
+                "displayName": "Delayed Repeated Command"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "Many Fireworks",
+            "conditions": [
+              {
+                "phrase": "!fireworks",
+                "type": "message",
+                "displayName": "!fireworks"
+              },
+              {
+                "conditions": [
+                  {
+                    "variableName": "dcommand_init",
+                    "variableInput": "10",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_init"
+                  },
+                  {
+                    "variableName": "dcommand_array",
+                    "variableInput": "summon firework_rocket {loc} {LifeTime:30,FireworksItem:{id:firework_rocket,count:1,components:{fireworks:{flight_duration:2,explosions:[{shape:\"large_ball\",has_twinkle:0,has_trail:0}]}}}}|summon firework_rocket {loc} {FireworksItem:{id:firework_rocket,components:{fireworks:{flight_duration:3,explosions:[{shape:large_ball,has_twinkle:1b,has_trail:1b,colors:[I;6076775],fade_colors:[I;13915044]}]}}}}|summon firework_rocket {loc} {Life:0,LifeTime:20,FireworksItem:{id:firework_rocket,components:{fireworks:{flight_duration:3,explosions:[{shape:star,has_twinkle:1b,has_trail:1b,colors:[I;6076775],fade_colors:[I;13915044]}]}}}}|/summon firework_rocket ~ ~ ~ {LifeTime:20,FireworksItem:{id:\"minecraft:firework_rocket\",count:1,components:{\"minecraft:fireworks\":{explosions:[{shape:\"burst\",has_twinkle:true,colors:[I;16711680],fade_colors:[I;2039807]}]}}}}|/summon firework_rocket ~ ~ ~ {LifeTime:20,FireworksItem:{id:\"minecraft:firework_rocket\",count:1,components:{\"minecraft:fireworks\":{explosions:[{shape:\"small_ball\",has_twinkle:true,colors:[I;2818303],fade_colors:[I;16711680]}]}}}}",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_array"
+                  },
+                  {
+                    "variableName": "dcommand_command",
+                    "variableInput": "summon firework_rocket {loc} {LifeTime:30,FireworksItem:{id:firework_rocket,count:1,components:{fireworks:{flight_duration:2,explosions:[{shape:\"large_ball\",has_twinkle:0,has_trail:0}]}}}}",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_command"
+                  },
+                  {
+                    "variableName": "dcommand_delay",
+                    "variableInput": "10",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_delay"
+                  },
+                  {
+                    "variableName": "dcommand_count",
+                    "variableInput": "30",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_count"
+                  },
+                  {
+                    "variableName": "dcommand_bossbar",
+                    "variableInput": "true",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_bossbar"
+                  },
+                  {
+                    "variableName": "bossbar_id",
+                    "variableInput": "firework_party_bossbar",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_id"
+                  },
+                  {
+                    "variableName": "bossbar_title",
+                    "variableInput": "\"Firework Party!\"",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_title"
+                  },
+                  {
+                    "variableName": "bossbar_targets",
+                    "variableInput": "@a",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_targets"
+                  },
+                  {
+                    "variableName": "bossbar_color",
+                    "variableInput": "blue",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_color"
+                  }
+                ],
+                "type": "multiple",
+                "displayName": "Delayed Repeat Command Setup"
+              }
+            ],
+            "outcomes": [
+              {
+                "name": "Delayed Repeated Command",
+                "type": "constant",
+                "displayName": "Delayed Repeated Command"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "All the chickens",
+            "conditions": [
+              {
+                "phrase": "!chickens",
+                "type": "message",
+                "displayName": "!chickens"
+              },
+              {
+                "conditions": [
+                  {
+                    "variableName": "dcommand_init",
+                    "variableInput": "10",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_init"
+                  },
+                  {
+                    "variableName": "dcommand_command",
+                    "variableInput": "summon chicken {loc}",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_command"
+                  },
+                  {
+                    "variableName": "dcommand_delay",
+                    "variableInput": "1",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_delay"
+                  },
+                  {
+                    "variableName": "dcommand_count",
+                    "variableInput": "500",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_count"
+                  },
+                  {
+                    "variableName": "bossbar_title",
+                    "variableInput": "\"Tempsy's Chickens!\"",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_title"
+                  },
+                  {
+                    "variableName": "bossbar_id",
+                    "variableInput": "chicken_party_bossbar",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_id"
+                  },
+                  {
+                    "variableName": "bossbar_targets",
+                    "variableInput": "@a",
+                    "type": "variableInsert",
+                    "displayName": "bossbar_targets"
+                  },
+                  {
+                    "variableName": "dcommand_bossbar",
+                    "variableInput": "true",
+                    "type": "variableInsert",
+                    "displayName": "dcommand_bossbar"
+                  }
+                ],
+                "type": "multiple",
+                "displayName": "Delayed Repeat Command Setup"
+              }
+            ],
+            "outcomes": [
+              {
+                "name": "Delayed Repeated Command",
+                "type": "constant",
+                "displayName": "Delayed Repeated Command"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          }
+        ]
+      },
+      "queue": [
+        "message"
+      ],
+      "ignoredTypes": [],
+      "for": "twitch"
+    }
+  ],
+  "init": [
+    {
+      "name": "Preferences Setup",
+      "conditions": [
+        {
+          "variableName": "commandFeedback",
+          "variableInput": "false",
+          "isGlobal": true,
+          "type": "variableInsert",
+          "displayName": "commandFeedback=Set to true to spam yourself with every command that is executed via the library"
+        },
+        {
+          "variableName": "executeAsSelf",
+          "variableInput": "true",
+          "isGlobal": true,
+          "type": "variableInsert",
+          "displayName": "executeAsSelf=set to true to execute as commands as streamer, false is as server"
+        }
+      ],
+      "outcomes": [],
+      "allowsOtherEventsToTrigger": true
+    }
+  ],
+  "type": "chat"
+}

@@ -1,0 +1,8 @@
+# Setup files
+*.toml
+
+# Misc logs
+logs/
+
+# Non-library constants
+constants.json

@@ -1,0 +1,128 @@
+{
+  "info": "Testing",
+  "conditions": {},
+  "outcomes": {
+    "Bossbar Create": {
+      "outcomes": [
+        {
+          "condition": {
+            "variableName": "command",
+            "variableInput": "bossbar add $bossbar_id $bossbar_title",
+            "type": "variableInsert"
+          },
+          "outcome": {
+            "name": "Execute Command",
+            "type": "constant",
+            "displayName": "Execute Command"
+          },
+          "type": "conditional",
+          "displayName": "Create Bossbar"
+        },
+        {
+          "condition": {
+            "variableName": "command",
+            "variableInput": "bossbar set $bossbar_id players $bossbar_targets",
+            "type": "variableInsert"
+          },
+          "outcome": {
+            "name": "Execute Command",
+            "type": "constant",
+            "displayName": "Execute Command"
+          },
+          "type": "conditional",
+          "displayName": "Show Bossbar"
+        },
+        {
+          "condition": {
+            "variableName": "command",
+            "variableInput": "bossbar set $bossbar_id max $bossbar_total",
+            "type": "variableInsert"
+          },
+          "outcome": {
+            "name": "Execute Command",
+            "type": "constant"
+          },
+          "type": "conditional",
+          "displayName": "Set Bossbar Max"
+        },
+        {
+          "name": "Bossbar set Color",
+          "type": "constant",
+          "displayName": "Set Bossbar color"
+        }
+      ],
+      "type": "multiple"
+    },
+    "Bossbar Destroy": {
+      "condition": {
+        "variableName": "command",
+        "variableInput": "bossbar remove $bossbar_id",
+        "type": "variableInsert"
+      },
+      "outcome": {
+        "name": "Execute Command",
+        "type": "constant",
+        "displayName": "Execute Command"
+      },
+      "type": "conditional"
+    },
+    "Bossbar set Color": {
+      "condition": {
+        "variableName": "command",
+        "variableInput": "bossbar set $bossbar_id color $bossbar_color",
+        "type": "variableInsert"
+      },
+      "outcome": {
+        "name": "Execute Command",
+        "type": "constant",
+        "displayName": "Execute Command"
+      },
+      "type": "conditional"
+    },
+    "Bossbar set Title": {
+      "condition": {
+        "variableName": "command",
+        "variableInput": "bossbar set $bossbar_id name $bossbar_title",
+        "type": "variableInsert"
+      },
+      "outcome": {
+        "name": "Execute Command",
+        "type": "constant",
+        "displayName": "Execute Command"
+      },
+      "type": "conditional"
+    },
+    "Bossbar set Value": {
+      "outcomes": [
+        {
+          "condition": {
+            "conditions": [
+              {
+                "calc": "floor",
+                "value1": "bossbar_value",
+                "value2": "0",
+                "variableName": "bossbar_value",
+                "type": "math",
+                "displayName": "Floor"
+              },
+              {
+                "variableName": "command",
+                "variableInput": "bossbar set $bossbar_id value $bossbar_value",
+                "type": "variableInsert"
+              }
+            ],
+            "type": "multiple"
+          },
+          "outcome": {
+            "name": "Execute Command",
+            "type": "constant",
+            "displayName": "Execute Command"
+          },
+          "type": "conditional"
+        }
+      ],
+      "type": "multiple"
+    }
+  },
+  "events": {}
+}
